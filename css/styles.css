@@ -1,0 +1,763 @@
+/* ==========================================================================
+   All About Bitcoin — design system
+   Dark "digital gold" OLED theme. Bitcoin orange accents, mono numerals.
+   Custom component layer; Tailwind (Play CDN) handles layout utilities.
+   ========================================================================== */
+
+:root {
+  /* brand fills — constant across themes (keep Bitcoin orange iconic) */
+  --btc-fill:   #F7931A;
+  --btc-fill-2: #D97D12;
+  --gold:       #E8B923;
+  --glow: 0 0 40px -8px rgba(247, 147, 26, 0.45);
+  --radius: 18px;
+}
+
+/* ---- dark theme (default) -------------------------------------------------- */
+:root,
+[data-theme="dark"] {
+  --bg:        #0A0A0B;
+  --surface:   #121214;
+  --surface-2: #191A1D;
+  --line:      rgba(255, 255, 255, 0.08);
+  --line-2:    rgba(255, 255, 255, 0.14);
+
+  --ink:    #F5F5F4;
+  --muted:  #A1A1AA;
+  --dim:    #71717A;
+
+  --bitcoin:        #F7931A;   /* readable as text on dark */
+  --bitcoin-bright: #FFB04D;
+
+  --up:   #16C784;
+  --down: #EA3943;
+
+  --grid:      rgba(255, 255, 255, 0.025);
+  --header-bg: rgba(10, 10, 11, 0.72);
+  --footer-bg: #08080A;
+  --glow-orb-opacity: 1;
+}
+
+/* ---- light theme ----------------------------------------------------------- */
+[data-theme="light"] {
+  --bg:        #FAF8F4;
+  --surface:   #FFFFFF;
+  --surface-2: #F2EEE6;
+  --line:      rgba(23, 18, 8, 0.12);
+  --line-2:    rgba(23, 18, 8, 0.20);
+
+  --ink:    #1A1408;
+  --muted:  #57534E;
+  --dim:    #78716C;
+
+  --bitcoin:        #B45309;   /* darker orange so links/text stay readable on white */
+  --bitcoin-bright: #C2410C;
+
+  --up:   #15803D;
+  --down: #DC2626;
+
+  --grid:      rgba(23, 18, 8, 0.05);
+  --header-bg: rgba(255, 255, 255, 0.82);
+  --footer-bg: #F2EEE6;
+  --glow-orb-opacity: 0.5;
+}
+
+/* smooth theme transition */
+body, .nav, .ticker, .footer, .card, .stat, .book-img, .pill, .embed, .progress {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Satoshi', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.mono { font-family: 'Fira Code', ui-monospace, monospace; font-feature-settings: "tnum"; }
+
+/* ---- ambient background ---------------------------------------------------- */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+}
+.glow-orb {
+  position: fixed;
+  top: -260px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 700px;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 40%,
+    rgba(247,147,26,0.22) 0%,
+    rgba(247,147,26,0.08) 35%,
+    transparent 70%);
+  filter: blur(20px);
+  opacity: var(--glow-orb-opacity);
+  pointer-events: none;
+}
+
+/* ---- top live ticker ------------------------------------------------------- */
+.ticker {
+  border-bottom: 1px solid var(--line);
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  font-size: 0.78rem;
+}
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+.ticker-track::-webkit-scrollbar { display: none; }
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.1rem;
+  color: var(--muted);
+  border-right: 1px solid var(--line);
+}
+.ticker-item .label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; }
+.ticker-item .val   { color: var(--ink); }
+
+/* ---- live pulse ------------------------------------------------------------ */
+.pulse {
+  position: relative;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--up);
+  box-shadow: 0 0 0 rgba(22,199,132,0.6);
+  animation: pulse 2s infinite;
+}
+.pulse.stale { background: var(--dim); animation: none; }
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(22,199,132,0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(22,199,132,0); }
+  100% { box-shadow: 0 0 0 0 rgba(22,199,132,0); }
+}
+
+/* ---- navbar ---------------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--header-bg);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, var(--btc-fill), #C76F0E);
+  color: #1a1205;
+  font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
+  box-shadow: var(--glow);
+}
+.brand-logo {
+  height: 30px;
+  width: auto;
+  display: block;
+  transition: transform 0.2s ease;
+}
+a:hover > .brand-logo { transform: rotate(-4deg) scale(1.05); }
+.nav-link {
+  position: relative;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link.active { color: var(--ink); }
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--bitcoin);
+}
+
+/* ---- desktop "Explore" dropdown -------------------------------------------- */
+.nav-dd { position: relative; }
+.nav-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.nav-dd-caret { transition: transform 0.2s ease; }
+.nav-dd:hover .nav-dd-caret,
+.nav-dd:focus-within .nav-dd-caret { transform: rotate(180deg); }
+.nav-dd-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 12px;              /* transparent bridge so hover survives the gap */
+  min-width: 234px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, visibility 0s linear 0.18s;
+  z-index: 50;
+}
+.nav-dd:hover .nav-dd-menu,
+.nav-dd:focus-within .nav-dd-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.nav-dd-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.7);
+}
+.nav-dd-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.nav-dd-item:hover { background: var(--surface); }
+.nav-dd-item .ddi-label { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+.nav-dd-item.active .ddi-label { color: var(--bitcoin); }
+.nav-dd-item .ddi-desc { font-size: 0.75rem; color: var(--dim); }
+
+/* ---- buttons --------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+}
+.btn:focus-visible { outline: 2px solid var(--bitcoin-bright); outline-offset: 2px; }
+.btn-primary {
+  background: linear-gradient(145deg, var(--btc-fill), var(--btc-fill-2));
+  color: #1a1205;
+  box-shadow: var(--glow);
+}
+.btn-primary:hover { box-shadow: 0 0 50px -6px rgba(247,147,26,0.6); }
+.btn-ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-ghost:hover { border-color: var(--bitcoin); color: var(--bitcoin-bright); }
+
+/* ---- cards ----------------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247,147,26,0.45);
+  box-shadow: 0 18px 50px -25px rgba(247,147,26,0.55);
+}
+
+/* ---- stat cards (live dashboard) ------------------------------------------ */
+.stat {
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(247,147,26,0.07), transparent 55%),
+    var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+}
+.stat .stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.stat .stat-value {
+  font-family: 'Fira Code', monospace;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 0.5rem;
+  font-feature-settings: "tnum";
+}
+.delta { font-size: 0.82rem; font-weight: 600; font-family: 'Fira Code', monospace; }
+.delta.up   { color: var(--up); }
+.delta.down { color: var(--down); }
+
+.flash { animation: flash 1s ease; }
+@keyframes flash {
+  0%   { color: var(--bitcoin-bright); text-shadow: 0 0 18px rgba(247,147,26,0.7); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+/* ---- supply progress ------------------------------------------------------- */
+.progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.progress > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--btc-fill), var(--gold));
+  transition: width 1s ease;
+}
+
+/* ---- section headers ------------------------------------------------------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bitcoin);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(247,147,26,0.3);
+  border-radius: 999px;
+  background: rgba(247,147,26,0.06);
+}
+
+/* ---- numbered step badges (home "start in three steps") -------------------- */
+.step-num {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 147, 26, 0.45);
+  color: var(--bitcoin);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* ---- video embeds ---------------------------------------------------------- */
+.embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--line);
+}
+.embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---- book covers (real cover images, stored locally) ---------------------- */
+.book-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px 9px 9px 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  box-shadow: -6px 8px 24px -10px rgba(0, 0, 0, 0.8);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+a:hover > .book-img,
+.book-img.hoverable:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: -8px 14px 36px -12px rgba(0, 0, 0, 0.9);
+}
+
+/* ---- book covers (CSS-rendered fallback) ---------------------------------- */
+.book-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px 10px 10px 6px;
+  padding: 1.1rem 1rem 1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: -6px 8px 24px -10px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.book-cover::before { /* spine */
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 8px;
+  background: rgba(0,0,0,0.35);
+  box-shadow: inset -2px 0 4px rgba(0,0,0,0.4);
+}
+.book-cover::after { /* sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255,255,255,0.14), transparent 40%);
+}
+.book-cover .bc-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  z-index: 1;
+}
+.book-cover .bc-author { font-size: 0.72rem; opacity: 0.85; z-index: 1; }
+.book-cover .bc-mark { font-family: 'Space Grotesk'; font-weight: 800; opacity: 0.5; z-index: 1; }
+
+/* ---- pills / tags ---------------------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+/* ---- footer ---------------------------------------------------------------- */
+.footer { border-top: 1px solid var(--line); background: var(--footer-bg); }
+
+/* ---- icon buttons (nav: theme toggle + mobile menu) ----------------------- */
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.icon-btn:hover { color: var(--ink); background: var(--surface); border-color: var(--line); }
+
+/* The hamburger is mobile-only. It carries Tailwind's `lg:hidden`, but .icon-btn's
+   own `display:grid` has equal specificity and wins on source order (styles.css loads
+   after tailwind.css), so the button would otherwise linger next to the desktop nav.
+   This rule re-asserts the hide at the same lg breakpoint. */
+@media (min-width: 1024px) {
+  [data-menu-toggle] { display: none; }
+}
+
+/* theme toggle icon swap — show sun in dark mode, moon in light mode */
+.theme-ic-moon { display: none; }
+[data-theme="light"] .theme-ic-sun  { display: none; }
+[data-theme="light"] .theme-ic-moon { display: block; }
+
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+.social-link:hover {
+  color: var(--bitcoin-bright);
+  border-color: rgba(247, 147, 26, 0.5);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+
+/* ---- FAQ accordion --------------------------------------------------------- */
+details.faq > summary { list-style: none; cursor: pointer; }
+details.faq > summary::-webkit-details-marker { display: none; }
+.faq-chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+details.faq[open] .faq-chevron { transform: rotate(180deg); }
+
+/* ---- reveal on scroll ------------------------------------------------------ */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---- mobile menu (full-screen overlay) ------------------------------------- */
+.mobile-menu { display: none; }
+@media (max-width: 1023px) {
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .mobile-menu.open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+}
+.mobile-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1.25rem 1rem;
+  flex: 1;
+  overflow-y: auto;
+}
+.mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 14px 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s ease;
+}
+.mobile-link svg {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: var(--bitcoin);
+}
+.mobile-link:hover, .mobile-link:focus-visible { color: var(--ink); }
+.mobile-link.active { color: var(--bitcoin); }
+.mobile-link.active svg { opacity: 1; transform: none; }
+.mobile-group {
+  margin-top: 0.9rem;
+  padding: 0.5rem 4px 0.15rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bitcoin);
+}
+.mobile-link.mobile-sub {
+  min-height: 48px;
+  padding-left: 14px;
+  font-size: 1.15rem;
+}
+.mobile-menu-foot { padding: 1.25rem; border-top: 1px solid var(--line); flex-shrink: 0; }
+body.menu-open { overflow: hidden; }
+
+/* ---- focus ----------------------------------------------------------------- */
+a:focus-visible, button:focus-visible, iframe:focus-visible {
+  outline: 2px solid var(--bitcoin-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- sticky mobile CTA ----------------------------------------------------- */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 45;
+  padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to top, var(--bg) 62%, transparent);
+  transform: translateY(140%);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+.sticky-cta.show { transform: none; pointer-events: auto; }
+.sticky-cta .btn { width: 100%; justify-content: center; }
+
+/* ---- explore: swipeable carousel on phones, grid on larger screens --------- */
+.explore-row {
+  display: flex;
+  gap: 1rem;
+  margin: 2.5rem -1rem 0;
+  padding: 0 1rem 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.explore-row::-webkit-scrollbar { display: none; }
+.explore-row > a { scroll-snap-align: start; flex: 0 0 78%; }
+@media (max-width: 639px) { .explore-row .reveal { opacity: 1; transform: none; } }
+@media (min-width: 640px) {
+  .explore-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2.5rem 0 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .explore-row > a { flex: none; }
+}
+@media (min-width: 1024px) {
+  .explore-row { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---- reading shelf: bigger swipeable covers on phones, a tidy row on desktop ---- */
+.shelf-row {
+  display: flex;
+  gap: 1.1rem;
+  margin: 0 -1rem;
+  padding: 0.25rem 1rem 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.shelf-row::-webkit-scrollbar { display: none; }
+.shelf-row > a { scroll-snap-align: start; flex: 0 0 42%; }
+.shelf-cap { margin-top: 0.6rem; }
+.shelf-cap .t {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.shelf-cap .a { font-size: 0.72rem; color: var(--dim); margin-top: 0.1rem; }
+/* horizontally-scrolled items never trip the scroll-reveal observer — keep them shown */
+@media (max-width: 639px) { .shelf-row .reveal { opacity: 1; transform: none; } }
+@media (min-width: 640px) {
+  .shelf-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    max-width: 44rem;
+  }
+  .shelf-row > a { flex: none; }
+}
+@media (min-width: 1024px) {
+  .shelf-row { grid-template-columns: repeat(6, 1fr); gap: 1.25rem; max-width: none; }
+}
+
+/* ---- sats converter -------------------------------------------------------- */
+.conv-grid { display: grid; gap: 1.5rem; }
+@media (min-width: 640px) { .conv-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+.conv-input-row { display: flex; flex-direction: column; gap: 0.7rem; }
+.conv-cur {
+  display: inline-flex;
+  width: max-content;
+  padding: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.conv-cur button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0.35rem 0.75rem;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.conv-cur button.active { color: var(--ink); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+.conv-amount {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+}
+.conv-amount:focus { outline: 2px solid var(--bitcoin-bright); outline-offset: 1px; border-color: transparent; }
+.conv-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.conv-presets .pill { cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease; }
+.conv-presets .pill:hover { color: var(--ink); border-color: var(--bitcoin); }
+.conv-result { padding-top: 1.25rem; border-top: 1px solid var(--line); }
+@media (min-width: 640px) {
+  .conv-result { padding-top: 0; padding-left: 1.5rem; border-top: 0; border-left: 1px solid var(--line); }
+}
+.conv-out { margin-top: 0.4rem; font-size: clamp(1.5rem, 5vw, 2.1rem); font-weight: 600; letter-spacing: -0.01em; color: var(--bitcoin); }
+.conv-out-sats { margin-top: 0.2rem; font-size: 1.05rem; color: var(--muted); }
+
+/* ---- tighter vertical rhythm on phones ------------------------------------- */
+@media (max-width: 639px) {
+  main .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  main .py-16 { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+  main .py-12 { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+  main .pt-20 { padding-top: 3rem; }
+  main .pt-16 { padding-top: 2.5rem; }
+  main .pb-20 { padding-bottom: 3rem; }
+  main .pb-10 { padding-bottom: 1.5rem; }
+  main .pb-8  { padding-bottom: 1.25rem; }
+}
+
+/* ---- reduced motion -------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

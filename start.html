@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('aab-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <title>Get started — All About Bitcoin</title>
+  <meta name="description" content="The practical first steps: see how much Bitcoin a little money buys, how to buy your first sats safely, and where to keep them.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="start">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="glow-orb" aria-hidden="true"></div>
+
+  <header id="site-header"></header>
+
+  <main>
+    <section class="max-w-7xl mx-auto px-4 pt-16 pb-8 text-center">
+      <span class="eyebrow">Ready to begin</span>
+      <h1 class="font-display font-bold text-4xl sm:text-5xl mt-6">Get started</h1>
+      <p class="text-muted mt-4 max-w-2xl mx-auto">You've done some reading — here's the practical part: see how far a little goes, how to buy your first sats safely, and where to keep them.</p>
+    </section>
+
+    <!-- ============ CONVERTER ============ -->
+    <section class="max-w-3xl mx-auto px-4 py-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-center">How much can you get?</h2>
+      <p class="text-muted text-center mt-3 mb-6 max-w-xl mx-auto">Each bitcoin divides into 100 million tiny units called <span class="text-ink">sats</span> — so you can start with almost any amount. Try it:</p>
+
+      <div class="card p-6 sm:p-8 reveal" data-converter>
+        <div class="conv-grid">
+          <div>
+            <label for="conv-amount" class="stat-label">I want to spend</label>
+            <div class="conv-input-row mt-3">
+              <div class="conv-cur" role="group" aria-label="Choose currency">
+                <button type="button" data-conv-cur="gbp" class="active" aria-pressed="true">£ GBP</button>
+                <button type="button" data-conv-cur="usd" aria-pressed="false">$ USD</button>
+              </div>
+              <input id="conv-amount" data-conv-amount type="number" inputmode="decimal" min="0" step="any" value="50" class="conv-amount" aria-label="Amount to spend">
+            </div>
+            <div class="conv-presets mt-3">
+              <button type="button" data-conv-preset="10" class="pill">10</button>
+              <button type="button" data-conv-preset="50" class="pill">50</button>
+              <button type="button" data-conv-preset="100" class="pill">100</button>
+              <button type="button" data-conv-preset="500" class="pill">500</button>
+            </div>
+          </div>
+          <div class="conv-result">
+            <span class="stat-label">That gets you</span>
+            <div class="conv-out mono" data-conv-btc>—</div>
+            <div class="conv-out-sats mono" data-conv-sats></div>
+            <p class="text-xs text-dim mt-2" data-conv-rate>Fetching the live price…</p>
+          </div>
+        </div>
+        <p class="text-xs text-dim mt-5 pt-5 border-t border-line">You're buying <span class="text-ink">sats</span>, not a whole coin. Figures are live estimates for illustration — not a quote or financial advice.</p>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO BUY ============ -->
+    <section class="max-w-3xl mx-auto px-4 py-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl">Buying your first Bitcoin</h2>
+      <p class="text-muted mt-3 mb-6 max-w-2xl">A calm, six-step walk-through. Take it slowly — there's no prize for rushing, and slowing down is itself a safety habit.</p>
+      <ol class="space-y-3">
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">1</span><p class="text-muted"><span class="text-ink font-medium">Learn before you buy.</span> Watch a couple of the <a href="videos.html" class="text-bitcoin hover:underline">videos</a> and skim the <a href="learn.html" class="text-bitcoin hover:underline">beginner's guide</a> first. Understanding comes before owning.</p></li>
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">2</span><p class="text-muted"><span class="text-ink font-medium">Choose a reputable, regulated exchange.</span> Pick a well-known platform that operates legally in your country. Reach it by typing the address or using a bookmark — never from an ad, a search result, or a message someone sent you.</p></li>
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">3</span><p class="text-muted"><span class="text-ink font-medium">Create your account and verify your ID.</span> Being asked for ID (known as "KYC") is normal and legally required — it isn't a scam. Just make sure you're on the official site or app before entering anything.</p></li>
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">4</span><p class="text-muted"><span class="text-ink font-medium">Switch on security.</span> Use a strong, unique password and turn on two-factor authentication — an authenticator app (like Google Authenticator) is safer than text-message codes.</p></li>
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">5</span><p class="text-muted"><span class="text-ink font-medium">Buy a small amount first.</span> Your first goal isn't profit — it's getting comfortable. Buy a few pounds' worth of sats and watch how it works before doing more.</p></li>
+        <li class="card p-4 flex gap-4 reveal"><span class="mono text-bitcoin">6</span><p class="text-muted"><span class="text-ink font-medium">Move it to a wallet you control.</span> For anything you mean to hold for a while, withdraw it from the exchange to your own wallet and back up your recovery phrase offline. More on that just below, and in the <a href="safety.html" class="text-bitcoin hover:underline">safety guide</a>.</p></li>
+      </ol>
+      <div class="card p-4 mt-5" style="border-color:rgba(247,147,26,0.3)">
+        <p class="text-sm text-muted"><span class="text-bitcoin font-semibold">A note:</span> nothing here is financial advice. Bitcoin's price can move sharply. Only ever spend what you can afford to lose, and take your time.</p>
+      </div>
+    </section>
+
+    <!-- ============ WHERE TO KEEP IT ============ -->
+    <section class="max-w-5xl mx-auto px-4 py-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-center">Where to keep it</h2>
+      <p class="text-muted text-center mt-3 mb-6 max-w-2xl mx-auto">A wallet doesn't actually hold your coins — it holds the <span class="text-ink">keys</span> that control them. That's the whole idea behind "not your keys, not your coins." Here's the lay of the land:</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Left on an exchange <span class="text-dim font-normal">(custodial)</span></h3>
+          <p class="text-sm text-muted mt-2">The exchange holds the keys for you, like a bank. Easiest way to start and fine for small amounts while you learn — but you're trusting the company, so it's not the place for long-term savings.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Your own wallet <span class="text-dim font-normal">(self-custody)</span></h3>
+          <p class="text-sm text-muted mt-2">You hold the keys and the recovery phrase — full control, and no account that can be frozen. It comes with more responsibility: if you lose the phrase, no one can recover it for you. This is the goal for anything you'll keep.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Hot wallet <span class="text-dim font-normal">(a phone or computer app)</span></h3>
+          <p class="text-sm text-muted mt-2">A self-custody wallet that lives on an internet-connected device. Handy for spending and smaller amounts — convenient, but a little more exposed because the device is online.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Cold / hardware wallet <span class="text-dim font-normal">(an offline device)</span></h3>
+          <p class="text-sm text-muted mt-2">A small dedicated device that keeps your keys off the internet entirely. A little more to set up, and the gold standard for larger amounts you're holding for the long term.</p>
+        </div>
+      </div>
+      <div class="card p-5 mt-4 reveal" style="border-color:rgba(247,147,26,0.3)">
+        <p class="text-sm text-muted"><span class="text-bitcoin font-semibold">Rule of thumb:</span> just starting, or only a small amount? A reputable app is fine. Holding for years, or a larger amount? Move to a hardware wallet and control your own recovery phrase. Whatever you pick, read <a href="safety.html" class="text-bitcoin hover:underline">Staying safe</a> first.</p>
+      </div>
+    </section>
+
+    <!-- ============ RUN A NODE ============ -->
+    <section class="max-w-5xl mx-auto px-4 py-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-center">Going further: run your own node</h2>
+      <p class="text-muted text-center mt-3 mb-6 max-w-2xl mx-auto">You don't need this to use Bitcoin — but when you're ready for genuine independence, running your own node is the next step. It's free software that keeps a full copy of the Bitcoin ledger and checks every rule for itself, so you can rely on Bitcoin without trusting anyone else.</p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="card p-5 reveal">
+          <div class="text-bitcoin mb-3"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3 class="font-display font-semibold">Verify, don't trust</h3>
+          <p class="text-sm text-muted mt-2">Confirm your own transactions and balance straight from the network — with no third-party server in between. That independence is what true financial sovereignty really means.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <div class="text-bitcoin mb-3"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+          <h3 class="font-display font-semibold">Keep your privacy</h3>
+          <p class="text-sm text-muted mt-2">Checking your wallet through someone else's server lets them see what's yours. Your own node keeps that information to itself, so your activity stays private.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <div class="text-bitcoin mb-3"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+          <h3 class="font-display font-semibold">Strengthen the network</h3>
+          <p class="text-sm text-muted mt-2">Every independent node makes Bitcoin harder to censor or change. Yours adds to the decentralisation that keeps the whole system resilient and out of any one party's control.</p>
+        </div>
+      </div>
+      <div class="card p-5 mt-4 reveal" style="border-color:rgba(247,147,26,0.3)">
+        <p class="text-sm text-muted"><span class="text-bitcoin font-semibold">Good to know:</span> this is an optional, more advanced step — most people buy and self-custody first, and come to running a node later. You can see how many nodes are securing Bitcoin worldwide on the <a href="network.html" class="text-bitcoin hover:underline">network page</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <div class="card p-8 sm:p-12 text-center" style="background:radial-gradient(120% 140% at 50% 0%, rgba(247,147,26,0.12), transparent 60%), var(--surface)">
+        <h2 class="font-display font-bold text-3xl">Keep it safe from day one</h2>
+        <p class="text-muted mt-4 max-w-xl mx-auto">The fastest way to lose Bitcoin is a scam or a mislaid recovery phrase — not the price. Five minutes on the safety guide is the best move you'll make.</p>
+        <div class="flex flex-wrap justify-center gap-3 mt-7">
+          <a href="safety.html" class="btn btn-primary">Read the safety guide</a>
+          <a href="faq.html" class="btn btn-ghost">Common questions</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="footer mt-10"></footer>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/converter.js" defer></script>
+</body>
+</html>

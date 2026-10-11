@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('aab-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <title>Learn — All About Bitcoin</title>
+  <meta name="description" content="A calm beginner's guide to Bitcoin: what it is, why it matters, how it works, the key terms, and how to take your first steps.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="learn">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="glow-orb" aria-hidden="true"></div>
+
+  <header id="site-header"></header>
+
+  <main>
+    <section class="max-w-7xl mx-auto px-4 pt-16 pb-8 text-center">
+      <span class="eyebrow">The beginner's guide</span>
+      <h1 class="font-display font-bold text-4xl sm:text-5xl mt-6">Learn Bitcoin</h1>
+      <p class="text-muted mt-4 max-w-2xl mx-auto">Five short steps from "I keep hearing about this" to genuinely understanding what Bitcoin is — and how to take your first steps safely.</p>
+    </section>
+
+    <div class="max-w-3xl mx-auto px-4 pb-20">
+
+      <!-- 01 -->
+      <section class="reveal py-8 border-t border-line">
+        <div class="flex items-baseline gap-4">
+          <span class="mono text-bitcoin text-lg">01</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl">What is money, really?</h2>
+        </div>
+        <p class="text-muted mt-4">Money is just a tool we use to store and exchange value. Good money is hard to produce, easy to verify, and holds its value over time. Throughout history people have used shells, beads, salt and gold — and each worked until someone found a way to make a lot more of it cheaply. When the supply explodes, savers lose.</p>
+      </section>
+
+      <!-- 02 -->
+      <section class="reveal py-8 border-t border-line">
+        <div class="flex items-baseline gap-4">
+          <span class="mono text-bitcoin text-lg">02</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl">So what is Bitcoin?</h2>
+        </div>
+        <p class="text-muted mt-4">Bitcoin is digital money with a fixed supply of 21 million coins that no person, company or government controls. It launched in 2009 and runs on a worldwide network of computers that all agree on who owns what. You can hold it yourself, send it to anyone, and no one can quietly create more of it.</p>
+        <div class="grid sm:grid-cols-2 gap-3 mt-5">
+          <div class="card p-4"><h3 class="font-display font-semibold">Fixed supply</h3><p class="text-sm text-muted mt-1">21 million, forever. The schedule is fixed in the software.</p></div>
+          <div class="card p-4"><h3 class="font-display font-semibold">No middleman</h3><p class="text-sm text-muted mt-1">Send value directly, peer to peer, with no bank in between.</p></div>
+          <div class="card p-4"><h3 class="font-display font-semibold">Open to all</h3><p class="text-sm text-muted mt-1">Anyone with a phone can use it. No permission needed.</p></div>
+          <div class="card p-4"><h3 class="font-display font-semibold">Self-custody</h3><p class="text-sm text-muted mt-1">Hold your own coins — no account that can be frozen.</p></div>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section class="reveal py-8 border-t border-line">
+        <div class="flex items-baseline gap-4">
+          <span class="mono text-bitcoin text-lg">03</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl">How does it work?</h2>
+        </div>
+        <p class="text-muted mt-4">Transactions are grouped into <em>blocks</em> and added to a shared ledger called the <em>blockchain</em>, roughly every ten minutes. A global process called <em>mining</em> secures that ledger and releases new coins on a fixed schedule. About every four years the rate of new coins is cut in half — the <em>halving</em> — until the last coin is issued around the year 2140.</p>
+        <p class="text-sm text-dim mt-4">You can watch this happening live on the <a href="network.html" class="text-bitcoin hover:underline">network page</a> — the block height and coins-mined figures update as the network runs.</p>
+      </section>
+
+      <!-- 04 — glossary -->
+      <section class="reveal py-8 border-t border-line">
+        <div class="flex items-baseline gap-4">
+          <span class="mono text-bitcoin text-lg">04</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl">Words you'll hear</h2>
+        </div>
+        <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-5 mt-5">
+          <div><dt class="font-display font-semibold">Wallet</dt><dd class="text-sm text-muted mt-1">An app that stores the keys controlling your bitcoin — not the coins themselves.</dd></div>
+          <div><dt class="font-display font-semibold">Private key / seed</dt><dd class="text-sm text-muted mt-1">The secret that proves the coins are yours. Whoever holds it controls the funds.</dd></div>
+          <div><dt class="font-display font-semibold">Satoshi (sat)</dt><dd class="text-sm text-muted mt-1">The smallest unit — 1 bitcoin = 100,000,000 sats. You don't need to buy a whole coin.</dd></div>
+          <div><dt class="font-display font-semibold">Node</dt><dd class="text-sm text-muted mt-1">A computer running Bitcoin that checks and enforces the rules for itself.</dd></div>
+          <div><dt class="font-display font-semibold">Halving</dt><dd class="text-sm text-muted mt-1">The ~4-yearly event that cuts the rate of new coins in half.</dd></div>
+          <div><dt class="font-display font-semibold">Cold storage</dt><dd class="text-sm text-muted mt-1">Keeping your keys offline (e.g. a hardware wallet) for extra security.</dd></div>
+        </dl>
+      </section>
+
+      <!-- 05 — get started -->
+      <section class="reveal py-8 border-t border-line">
+        <div class="flex items-baseline gap-4">
+          <span class="mono text-bitcoin text-lg">05</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl">Taking your first steps</h2>
+        </div>
+        <ol class="mt-5 space-y-3">
+          <li class="card p-4 flex gap-4"><span class="mono text-bitcoin">1</span><p class="text-muted"><span class="text-ink font-medium">Learn before you buy.</span> Watch a couple of the <a href="videos.html" class="text-bitcoin hover:underline">videos</a> and read an <a href="articles.html" class="text-bitcoin hover:underline">essay</a> first. Understanding comes before owning.</p></li>
+          <li class="card p-4 flex gap-4"><span class="mono text-bitcoin">2</span><p class="text-muted"><span class="text-ink font-medium">Start small.</span> You can buy a few pounds' worth of sats. There's no need to buy a whole bitcoin.</p></li>
+          <li class="card p-4 flex gap-4"><span class="mono text-bitcoin">3</span><p class="text-muted"><span class="text-ink font-medium">Use a reputable exchange.</span> Choose a well-known, regulated platform in your country to make your first purchase.</p></li>
+          <li class="card p-4 flex gap-4"><span class="mono text-bitcoin">4</span><p class="text-muted"><span class="text-ink font-medium">Learn self-custody.</span> Once you're comfortable, move your coins to your own wallet and back up your seed phrase offline. "Not your keys, not your coins."</p></li>
+          <li class="card p-4 flex gap-4"><span class="mono text-bitcoin">5</span><p class="text-muted"><span class="text-ink font-medium">Keep learning.</span> Bitcoin rewards patience and curiosity far more than rushing.</p></li>
+        </ol>
+        <div class="card p-4 mt-5" style="border-color:rgba(247,147,26,0.3)">
+          <p class="text-sm text-muted"><span class="text-bitcoin font-semibold">A note:</span> nothing here is financial advice. Bitcoin's price can move sharply. Only ever risk what you can afford to lose, and do your own research.</p>
+        </div>
+      </section>
+
+      <!-- next -->
+      <div class="card p-8 mt-10 text-center">
+        <h2 class="font-display font-semibold text-2xl">Ready to take the first step?</h2>
+        <p class="text-muted mt-2">See how far a little goes, how to buy your first sats safely, and where to keep them.</p>
+        <div class="flex flex-wrap justify-center gap-3 mt-5">
+          <a href="start.html" class="btn btn-primary">Get started</a>
+          <a href="videos.html" class="btn btn-ghost">Watch the videos</a>
+          <a href="books.html" class="btn btn-ghost">Browse books</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="footer mt-10"></footer>
+
+  <script src="js/livedata.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

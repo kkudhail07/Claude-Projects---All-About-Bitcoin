@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('aab-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <title>The network, live — All About Bitcoin</title>
+  <meta name="description" content="Bitcoin's network in real time — live price in GBP and USD, coins mined to date, block height, the next halving and how many nodes keep it running.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="network">
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="glow-orb" aria-hidden="true"></div>
+
+  <header id="site-header"></header>
+
+  <main>
+    <section class="max-w-7xl mx-auto px-4 pt-16 pb-6 text-center">
+      <span class="eyebrow">Live data</span>
+      <h1 class="font-display font-bold text-4xl sm:text-5xl mt-6">The Bitcoin network, in real time</h1>
+      <p class="text-muted mt-4 max-w-2xl mx-auto">The same numbers a node sees — price, the coins issued so far, the latest block, the countdown to the next halving, and the computers keeping it all honest. The price and chain figures refresh on their own.</p>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 pb-12">
+      <div class="flex items-center justify-end gap-2 text-sm text-dim mb-4">
+        <span class="pulse" data-pulse></span><span data-live="updated">Connecting…</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="stat reveal">
+          <div class="stat-label">Bitcoin price · GBP</div>
+          <div class="stat-value" data-live="price-gbp">£—</div>
+          <div class="mt-2 delta" data-live="change-gbp">—</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-label">Bitcoin price · USD</div>
+          <div class="stat-value" data-live="price-usd">$—</div>
+          <div class="mt-2 delta" data-live="change-usd">—</div>
+        </div>
+
+        <div class="stat reveal md:col-span-2">
+          <div class="flex items-baseline justify-between flex-wrap gap-2">
+            <div class="stat-label">Bitcoin mined to date</div>
+            <div class="text-sm text-dim">of <span class="mono text-muted">21,000,000</span> maximum</div>
+          </div>
+          <div class="stat-value" data-live="mined">— BTC</div>
+          <div class="progress mt-4"><span data-supply-bar style="width:0%"></span></div>
+          <div class="mt-2 text-sm text-muted"><span class="mono text-bitcoin" data-live="mined-pct">—</span> of all bitcoin that will ever exist has been issued.</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        <div class="stat reveal">
+          <div class="stat-label">Latest block</div>
+          <div class="stat-value text-2xl" data-live="height">—</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-label">Reachable nodes</div>
+          <div class="stat-value text-2xl">~16,000</div>
+          <div class="mt-1 text-sm text-dim">publicly reachable · est.</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-label">Next halving in</div>
+          <div class="stat-value text-2xl" data-live="halving">—</div>
+          <div class="mt-1 text-sm text-dim" data-live="halving-date">—</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-label">Market cap · USD</div>
+          <div class="stat-value text-2xl" data-live="mcap">—</div>
+        </div>
+      </div>
+      <p class="text-xs text-dim mt-4">
+        Live data from CoinGecko (price) and mempool.space (supply &amp; blocks). The reachable-node figure is an approximate estimate. Figures are for education, not financial advice.
+      </p>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <span class="eyebrow">Read the numbers</span>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl mt-5 mb-6">What these numbers mean</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Price (GBP / USD)</h3>
+          <p class="text-sm text-muted mt-2">What one bitcoin trades for right now. It moves constantly because it's set by a global, 24/7 market — not by any institution.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Mined to date</h3>
+          <p class="text-sm text-muted mt-2">How many of the eventual 21 million coins have been issued. New coins arrive with each block and the rate keeps falling — so this line creeps toward 21M but never overshoots.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Latest block</h3>
+          <p class="text-sm text-muted mt-2">The height of the most recent block added to the chain. A new one is found roughly every ten minutes, each one extending the shared ledger.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Reachable nodes</h3>
+          <p class="text-sm text-muted mt-2">Independent computers running Bitcoin and checking every rule for themselves — the more there are, the harder the network is to censor or change. There are typically between 15,000 and 20,000 "publicly reachable" nodes at any given time. Counting "unreachable" private nodes hidden behind VPNs or Tor, the total active count is estimated to be much higher — anywhere from 40,000 to over 70,000 globally.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Next halving</h3>
+          <p class="text-sm text-muted mt-2">Every 210,000 blocks (~4 years) the new-coin reward is cut in half. This countdown shows how many blocks remain until the next one.</p>
+        </div>
+        <div class="card p-5 reveal">
+          <h3 class="font-display font-semibold">Market cap</h3>
+          <p class="text-sm text-muted mt-2">Price multiplied by the coins in circulation — a rough measure of Bitcoin's total size against other assets.</p>
+        </div>
+      </div>
+      <div class="card p-5 reveal mt-4" style="border-color:rgba(247,147,26,0.3)">
+        <h3 class="font-display font-semibold text-bitcoin">New to all this?</h3>
+        <p class="text-sm text-muted mt-2">Start with the beginner's guide — it explains blocks, halvings, nodes and the 21 million cap from scratch.</p>
+        <a href="learn.html" class="nav-link inline-block mt-3">Read the guide →</a>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <div class="card p-8 sm:p-12 text-center" style="background:radial-gradient(120% 140% at 50% 0%, rgba(247,147,26,0.12), transparent 60%), var(--surface)">
+        <h2 class="font-display font-bold text-3xl">Now learn what's behind the numbers</h2>
+        <p class="text-muted mt-4 max-w-xl mx-auto">The data is more interesting once you know the why. Start the beginner's guide, or watch a few of the videos.</p>
+        <div class="flex flex-wrap justify-center gap-3 mt-7">
+          <a href="learn.html" class="btn btn-primary">Start learning</a>
+          <a href="videos.html" class="btn btn-ghost">Watch the videos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="footer mt-10"></footer>
+
+  <script src="js/livedata.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
